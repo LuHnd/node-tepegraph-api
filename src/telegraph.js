@@ -16,16 +16,16 @@ class Telegraph {
 
   _request(path, options) {
     return axios
-      .post(BASE + path, null, {
-        params: options,
+      .post(BASE + path, options, {
+        headers: {
+          "Content-Type": "application/json",
+        },
       })
-      .then((response) => {
-        return response.data;
-      })
-      .catch(function (err) {
-        throw this._error(err);
+      .then((res) => {
+        return res.data;
       });
   }
+
   /**
    *
    * Use this method to create a new Telegraph account. Most users only need one account, but this can be useful for channel administrators who would like to keep individual author names and profile links for each of their channels. On success, returns an Account object with the regular fields and an additional access_token field.
