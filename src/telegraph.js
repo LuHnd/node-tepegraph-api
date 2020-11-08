@@ -56,6 +56,30 @@ class Telegraph {
       ...options,
     });
   }
+
+  /**
+   *
+   * Use this method to get information about a Telegraph account. Returns an Account object on success.
+   * @param {String} access_token - Required. Access token of the Telegraph account.
+   * @param {Object} [options]
+   * @param {Array} [options.fields] - List of account fields to return. Available fields: short_name, author_name, author_url, auth_url, page_count.
+   */
+  getAccountInfo(access_token, options = {}) {
+    return this._request("getAccountInfo", {
+      access_token,
+      ...options,
+    });
+  }
+
+  /**
+   *
+   * Use this method to revoke access_token and generate a new one, for example, if the user would like to reset all connected sessions, or you have reasons to believe the token was compromised. On success, returns an Account object with new access_token and auth_url fields.
+   * @param {String} access_token - Required. Access token of the Telegraph account.
+   */
+  revokeAccessToken(access_token) {
+    return this._request("revokeAccessToken", { access_token });
+  }
+
   /**
    *
    * Use this method to create a new Telegraph page. On success, returns a Page object.
