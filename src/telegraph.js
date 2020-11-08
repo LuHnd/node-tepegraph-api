@@ -43,6 +43,21 @@ class Telegraph {
 
   /**
    *
+   * Use this method to update information about a Telegraph account. Pass only the parameters that you want to edit. On success, returns an Account object with the default fields.
+   * @param {String} access_token - Required. Access token of the Telegraph account.
+   * @param {Object} [options]
+   * @param {String} [options.short_name] - New account name.
+   * @param {String} [options.author_name] - New default author name used when creating new articles.
+   * @param {String} [options.author_url] - New default profile link, opened when users click on the author's name below the title. Can be any link, not necessarily to a Telegram profile or channel.
+   */
+  editAccountInfo(access_token, options = {}) {
+    return this._request("editAccountInfo", {
+      access_token,
+      ...options,
+    });
+  }
+  /**
+   *
    * Use this method to create a new Telegraph page. On success, returns a Page object.
    * @param {String} access_token - Required. Access token of the Telegraph account.
    * @param {String} title - Required. Page title.
