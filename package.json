@@ -1,0 +1,18 @@
+{
+  "name": "node-tepegraph-api",
+  "version": "0.0.1",
+  "description": "Node.js module to interact with the official Telegraph API.",
+  "main": "./src/telegraph.js",
+  "author": "<hennady.lukinov@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.21.0"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3"
+  },
+  "scripts": {
+    "test": "jest"
+  }
+}
