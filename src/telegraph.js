@@ -99,6 +99,28 @@ class Telegraph {
       ...options,
     });
   }
+
+  /**
+   *
+   * Use this method to edit an existing Telegraph page. On success, returns a Page object.
+   * @param {String} access_token - Required. Access token of the Telegraph account.
+   * @param {String} path - Required. Path to the page.
+   * @param {String} title - Required. Page title.
+   * @param {Array} content - Required. Content of the page.
+   * @param {Object} [options]
+   * @param {String} [options.author_name] - Author name, displayed below the article's title.
+   * @param {String} [options.author_url] - Profile link, opened when users click on the author's name below the title. Can be any link, not necessarily to a Telegram profile or channel.
+   * @param {Boolean} [options.return_content] - If true, a content field will be returned in the Page object (see: Content format).
+   */
+  editPage(access_token, path, title, content, options = {}) {
+    return this._request("createPage", {
+      access_token,
+      path,
+      title,
+      content: JSON.stringify(content),
+      ...options,
+    });
+  }
 }
 
 module.exports = Telegraph;
