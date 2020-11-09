@@ -26,9 +26,33 @@ test("getAccountInfo()", () => {
 });
 
 test("createPage()", () => {
-  return tph
-    .createPage(token, "title", [{ tag: "p", children: ["Test"] }])
-    .then(function (res) {
-      expect(res.result.title).toBe("title");
-    });
+    return tph
+        .createPage(token, "title", [{ tag: "p", children: ["Test"] }])
+        .then(function (res) {
+            expect(res.result.title).toBe("title");
+        });
+});
+
+test("getPage()", () => {
+    return tph
+        .getPage("Sample-Page-12-15")
+        .then(function (res) {
+            expect(res.result.url).toBe("https://telegra.ph/Sample-Page-12-15");
+        });
+});
+
+test("getPage() return_content: true", () => {
+    return tph
+        .getPage("Sample-Page-12-15", {return_content: true})
+        .then(function (res) {
+            expect(res.result.content).toBeDefined();
+        });
+});
+
+test("getViews()", () => {
+    return tph
+        .getViews("Sample-Page-12-15")
+        .then(function (res) {
+            expect(res.result.views).toBeDefined();
+        });
 });

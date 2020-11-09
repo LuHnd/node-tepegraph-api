@@ -85,7 +85,7 @@ class Telegraph {
    * Use this method to create a new Telegraph page. On success, returns a Page object.
    * @param {String} access_token - Required. Access token of the Telegraph account.
    * @param {String} title - Required. Page title.
-   * @param {Array} content - Required. Content of the page.
+   * @param {Array |} content - Required. Content of the page.
    * @param {Object} [options]
    * @param {String} [options.author_name] - Author name, displayed below the article's title.
    * @param {String} [options.author_url] - Profile link, opened when users click on the author's name below the title. Can be any link, not necessarily to a Telegram profile or channel.
@@ -118,6 +118,52 @@ class Telegraph {
       path,
       title,
       content: JSON.stringify(content),
+      ...options,
+    });
+  }
+
+  /**
+   *
+   * Use this method to get a Telegraph page. Returns a Page object on success.
+   * @param {String} path - Required. Path to the Telegraph page (in the format Title-12-31, i.e. everything that comes after http://telegra.ph/).
+   * @param {Object} [options]
+   * @param {Boolean} [options.return_content] - (default = false) If true, a content field will be returned in the Page object (see: Content format).
+   */
+  getPage(path, options = {}) {
+    return this._request("getPage", {
+      path,
+      ...options,
+    });
+  }
+
+  /**
+   *
+   * Use this method to get a list of pages belonging to a Telegraph account. Returns a PageList object, sorted by most recently created pages first.
+   * @param {String} access_token - Required. Access token of the Telegraph account.
+   * @param {Object} [options]
+   * @param {Integer} [options.offset] - (default = 0) Sequential number of the first page to be returned.
+   * @param {Integer} [options.limit] - (0-200, default = 50) Limits the number of pages to be retrieved.
+   */
+  getPageList(access_token, options = {}) {
+    return this._request("getPageList", {
+      access_token,
+      ...options,
+    });
+  }
+
+  /**
+   *
+   * Use this method to get a list of pages belonging to a Telegraph account. Returns a PageList object, sorted by most recently created pages first.
+   * @param {String} path - Required. Path to the Telegraph page (in the format Title-12-31, where 12 is the month and 31 the day the article was first published).
+   * @param {Object} [options]
+   * @param {Integer} [options.hour] - (0-24) If passed, the number of page views for the requested hour will be returned.
+   * @param {Integer} [options.day] - (1-31) Required if hour is passed. If passed, the number of page views for the requested day will be returned.
+   * @param {Integer} [options.month] - (1-12) Required if day is passed. If passed, the number of page views for the requested month will be returned.
+   * @param {Integer} [options.year] - (2000-2100) Required if month is passed. If passed, the number of page views for the requested year will be returned.
+   */
+  getViews(path, options = {}) {
+    return this._request("getViews", {
+      path,
       ...options,
     });
   }
